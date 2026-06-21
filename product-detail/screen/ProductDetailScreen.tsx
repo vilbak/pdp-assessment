@@ -12,7 +12,7 @@ import { useProductDetailScreen } from './useProductDetailScreen';
 
 type Props = { productId: string; onSelectProduct?: (id: string) => void };
 
-// Issue 1: the original 429-line god component, split into this thin shell + slice.
+// Issue 1: the original 479-line god component, split into this thin shell + slice.
 // Issue 8: named export (no export default).
 export const ProductDetailScreen = ({ productId, onSelectProduct }: Props) => {
   const vm = useProductDetailScreen(productId);

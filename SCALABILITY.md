@@ -1,7 +1,7 @@
 # Task 4 — Scalability
 
 How the page handles the features it will need next, and where new complexity should go.
-Short version: most of these are small, contained changes, because each concern already
+Short version: most of these are small changes, because each concern already
 lives in its own layer.
 
 ## The six features
@@ -9,8 +9,8 @@ lives in its own layer.
 **Personalised recommendations.**
 Recommendations are already their own piece (`useRecommendationsQuery` + the `Recommendations`
 component). To personalise them, add the user — and their recently-viewed ids — to the query
-key and the request; the ranking itself stays on the server. Nothing else has to change. That
-contained blast radius is the whole point of keeping the section isolated.
+key and the request; the ranking itself stays on the server. Nothing else has to change, because
+the section is isolated.
 
 **A/B testing.**
 Decide the variant in one place (the screen hook or a context) and include it in the query
@@ -27,6 +27,10 @@ already works: the currency comes from the data, never hardcoded.
 **Internationalisation (i18n).**
 All user-facing text lives in `config/strings.ts` and dates use `Intl`. Later you swap
 `strings.ts` for i18next / react-intl — there's no hardcoded copy to hunt down first.
+
+**Server-side rendering (SSR).**
+`model/` and `api/` are server-safe. The catch: Zustand `persist` touches `localStorage` (guard it on
+the server), and React Query needs server prefetch + client hydration so the page doesn't refetch on load.
 
 
 

@@ -25,6 +25,14 @@ export const useProductDetailScreen = (productId: string) => {
     if (product.data) trackRecentlyViewed(product.data);
   }, [product.data?.id]);
 
+  // Reset per-product UI state when productId changes (in-screen navigation reuses this hook).
+  useEffect(() => {
+    setSelectedImage('');
+    setQuantity(1);
+    setCouponCode('');
+    couponMutation.reset();
+  }, [productId]);
+
   // ── Derived ──
   const discount = couponMutation.data?.valid ? couponMutation.data.discount : 0;
   const activeImage = selectedImage || product.data?.images[0] || '';

@@ -1,6 +1,6 @@
 # Product Detail Page — Architecture & Refactoring Assessment
 
-A take-home: a legacy 429-line React Product Detail Page, audited and refactored. This repo has the
+A take-home: a legacy 479-line React Product Detail Page, audited and refactored. This repo has the
 audit, the refactored code, and short notes for each task.
 
 
@@ -42,7 +42,22 @@ read from those directly, so nothing passes server data down by hand. Entry poin
 - **No needless memo (Issue 20).** `finalPrice` was a `useMemo` over trivial math whose deps changed every
   render. It's a plain value now. Memo would only help later — e.g. a list card, if the lists get long and
   profiling shows it's needed.
+- **Cancellation, dedup, caching (Issue 11).** Each query passes React Query's `signal` to `fetch`, so a
+  stale product request is cancelled when you switch products (no race). React Query also dedups identical
+  in-flight requests and caches per key; the view-tracking query fires once via `staleTime: Infinity`.
 
+## Decisions & trade-offs
+
+- **React Query for server data** (over SWR / RTK Query): caching, cancellation, and request dedup out of
+  the box, and it keeps fetching out of components. RTK Query would pull in Redux, which this page doesn't
+  otherwise need.
+- **Zustand for client state** (over Context / Redux): cart and recently-viewed are small and must survive
+  reloads — Zustand + `persist` does that with almost no boilerplate. Context would re-render half the tree;
+  Redux is too much for two slices of state.
+- **Sections own their data** (Reviews, Delivery, Recommendations each run their own query) instead of the
+  screen hook fetching everything: each section stays independent and the screen stays thin. The cost:
+  query keys are spread across files and SSR prefetch has to know them. Acceptable at this size.
+- **Named exports + barrels** (no default exports): greppable, stable identity, painless renames.
 
 ## Tasks → files
 

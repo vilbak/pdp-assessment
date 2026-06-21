@@ -8,6 +8,7 @@ export const strings = {
   couponPlaceholder: 'Enter coupon',
   apply: 'Apply',
   checkDelivery: 'Check delivery',
+  check: 'Check',
   postcodePlaceholder: 'Postcode',
   addToCart: 'Add to cart',
   addToWishlist: 'Add to wishlist',
