@@ -1,10 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  useCouponMutation,
-  useProductQuery,
-  useProductViewTracking,
-  useWishlist,
-} from '../data';
+import { useCouponMutation, useProductQuery, useProductViewTracking, useWishlist } from '../data';
 import { useCartStore, useRecentlyViewedStore } from '../store';
 import { clampQuantity } from '../model';
 
@@ -55,7 +50,11 @@ export const useProductDetailScreen = (productId: string) => {
       refetch: product.refetch, // Issue 25: error retry = refetch, not a page reload
     },
     // ── Gallery ──
-    gallery: { images: product.data?.images ?? [], selected: activeImage, select: setSelectedImage },
+    gallery: {
+      images: product.data?.images ?? [],
+      selected: activeImage,
+      select: setSelectedImage,
+    },
     // ── Pricing / quantity ──
     discount,
     quantity: { value: quantity, set: setQuantitySafe },

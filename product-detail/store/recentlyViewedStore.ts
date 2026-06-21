@@ -12,8 +12,7 @@ export const useRecentlyViewedStore = create<RecentlyViewedState>()(
     (set) => ({
       items: [],
       // Issue 14: an action + pure transform, not a self-updating effect (the original looped).
-      track: (product) =>
-        set((state) => ({ items: addRecentlyViewed(state.items, product) })),
+      track: (product) => set((state) => ({ items: addRecentlyViewed(state.items, product) })),
     }),
     { name: 'pdp.recentlyViewed' },
   ),

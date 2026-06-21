@@ -14,8 +14,6 @@ export const addItemToCart = (cart: CartItem[], item: CartItem): CartItem[] => {
     return [...cart, item];
   }
   return cart.map((line) =>
-    line.productId === item.productId
-      ? { ...line, quantity: line.quantity + item.quantity }
-      : line,
+    line.productId === item.productId ? { ...line, quantity: line.quantity + item.quantity } : line,
   );
 };

@@ -49,7 +49,11 @@ export const ProductDetailScreen = ({ productId, onSelectProduct }: Props) => {
       </div>
 
       <ProductTabs productId={product.id} description={product.description} />
-      <Recommendations productId={product.id} category={product.category} onSelect={onSelectProduct} />
+      <Recommendations
+        productId={product.id}
+        category={product.category}
+        onSelect={onSelectProduct}
+      />
       <RecentlyViewed onSelect={onSelectProduct} />
     </main>
   );

@@ -23,10 +23,9 @@ export const fetchRecommendations = (
   category: string,
   signal?: AbortSignal,
 ): Promise<Recommendation[]> =>
-  request<Recommendation[]>(
-    `/recommendations?productId=${productId}&category=${category}`,
-    { signal },
-  );
+  request<Recommendation[]>(`/recommendations?productId=${productId}&category=${category}`, {
+    signal,
+  });
 
 export const estimateDelivery = (
   postcode: string,
@@ -41,10 +40,7 @@ export const estimateDelivery = (
 export const validateCoupon = (code: string, signal?: AbortSignal): Promise<CouponResult> =>
   request<CouponResult>('/coupons/validate', { method: 'POST', body: { code }, signal });
 
-export const fetchWishlistStatus = (
-  productId: string,
-  signal?: AbortSignal,
-): Promise<boolean> =>
+export const fetchWishlistStatus = (productId: string, signal?: AbortSignal): Promise<boolean> =>
   request<{ wishlisted: boolean }>(`/wishlist/${productId}`, { signal }).then(
     (res) => res.wishlisted,
   );

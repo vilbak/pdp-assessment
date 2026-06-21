@@ -19,13 +19,9 @@ export interface Product {
 }
 
 // Issue 7: a product as shown in a list — derived from Product so it can't drift.
-export type ProductSummary = Pick<
-  Product,
-  'id' | 'name' | 'price' | 'currency' | 'images'
->;
+export type ProductSummary = Pick<Product, 'id' | 'name' | 'price' | 'currency' | 'images'>;
 
 export type Recommendation = ProductSummary; // Issue 7: was Rec (no currency → the Issue 30 bug)
-
 
 export interface Review {
   id: string;
