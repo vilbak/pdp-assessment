@@ -1,10 +1,7 @@
 # Task 1 — Code Audit
 
 Key issues found in the original `ProductPageClient.tsx`, before refactoring. Each is marked in place
-with `// Issue N` and addressed in the `product-detail/` refactor — most are fully fixed; a few are
-partial or remain known limitations (Issue 22 cart-vs-stock on repeated add, Issue 29 arrow-key tab
-navigation, Issue 35 runtime schema validation). Issues 1–30 are the first pass; 31–35 came from a
-second review.
+with `// Issue N` and addressed in the `product-detail/` refactor
 
 Issue 1: One giant component does everything — data fetching, business logic, storage, analytics,
 and UI. Nothing can be tested, reused, or changed on its own.
