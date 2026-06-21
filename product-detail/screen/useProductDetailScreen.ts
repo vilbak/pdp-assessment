@@ -25,7 +25,6 @@ export const useProductDetailScreen = (productId: string) => {
     if (product.data) trackRecentlyViewed(product.data);
   }, [product.data?.id]);
 
-  // Reset per-product UI state when productId changes (in-screen navigation reuses this hook).
   useEffect(() => {
     setSelectedImage('');
     setQuantity(1);

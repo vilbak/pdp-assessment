@@ -6,7 +6,6 @@ import { LabeledField } from './LabeledField';
 type Props = { productId: string };
 
 export const DeliveryEstimate = ({ productId }: Props) => {
-  const [draft, setDraft] = useState('');
   const [postcode, setPostcode] = useState('');
   const delivery = useDeliveryQuery(productId, postcode);
 
@@ -19,12 +18,12 @@ export const DeliveryEstimate = ({ productId }: Props) => {
   return (
     <LabeledField
       label={strings.checkDelivery}
-      value={draft}
-      onChange={setDraft}
+      value={postcode}
+      onChange={setPostcode}
       placeholder={strings.postcodePlaceholder}
       message={message}
       action={
-        <button type="button" onClick={() => setPostcode(draft.trim())}>
+        <button type="button" onClick={() => postcode.trim() && delivery.refetch()}>
           {strings.check}
         </button>
       }
