@@ -20,7 +20,7 @@ spacing.
 
 Issue 5: Doesn't follow conventions — naming, types, and exports.
 
-Issue 6: Cryptic type names (Item / R / Rec / CItem) that are hard to read. Should be
+Issue 6: Type names (Item / R / Rec / CItem) that are hard to read. Should be
 Product / Review / Recommendation / CartItem.
 
 Issue 7: (nice-to-have) Each type is shaped on its own instead of derived from one Product. Not a
@@ -73,8 +73,7 @@ uses a blocking `alert()`, and never checks stock.
 Issue 23: The wishlist toggle has no click guard, updates optimistically with no rollback (the UI
 lies on failure), and never loads the real status from the server.
 
-Issue 24: `renderStars` is a JSX-returning helper (should be a component), and
-`'☆'.repeat(5 - rounded)` crashes for any rating above 5.
+Issue 24: `renderStars` is a JSX-returning helper but should be a component.
 
 Issue 25: Three near-identical `<main>` guard returns, and the error button does a full
 `window.location.reload()` instead of a targeted retry.
@@ -104,5 +103,4 @@ Issue 33: JSON request bodies are sent without a `Content-Type: application/json
 Issue 34: Query params are interpolated into URLs without `encodeURIComponent` (e.g. `postcode`,
 which is user input).
 
-Issue 35: API responses are trusted as typed with no runtime validation, so a wrong shape (missing
-images, a null price) crashes the render.
+Issue 35: No runtime validation.
