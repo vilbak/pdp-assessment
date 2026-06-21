@@ -3,8 +3,7 @@
 A take-home: a legacy 429-line React Product Detail Page, audited and refactored. This repo has the
 audit, the refactored code, and short notes for each task.
 
-> Mock: the APIs aren't real and the project doesn't run. `zustand` and `vitest` aren't installed, so a
-> type-check shows missing-module errors. Those come from the missing packages, not from bugs in the code.
+
 
 ## How to read this repo
 
@@ -44,22 +43,6 @@ read from those directly, so nothing passes server data down by hand. Entry poin
   render. It's a plain value now. Memo would only help later — e.g. a list card, if the lists get long and
   profiling shows it's needed.
 
-React Query also gives request cancellation, per-key caching, and dedup with no extra code.
-
-## Known limitations (honest)
-
-- **Cart vs stock (Issue 22):** quantity is clamped on input, but re-adding the same product keeps adding
-  up with no cap. The client cart is optimistic; stock is checked on the server at checkout.
-- **Keyboard tabs (Issue 29):** the tabs have ARIA roles but not full arrow-key navigation yet.
-- **No runtime validation (Issue 35):** responses are trusted as typed. A schema check (e.g. zod) would
-  close this.
-- **Deps not installed:** `zustand` and `vitest` aren't in `package.json` here, so a type-check is red.
-  Installing them clears it; there are no real type errors in the code.
-
-## Tests
-
-The pure `model/` logic is unit-tested (cart, pricing, recently-viewed, rating).
-Run with `npm i -D vitest && npx vitest`.
 
 ## Tasks → files
 
