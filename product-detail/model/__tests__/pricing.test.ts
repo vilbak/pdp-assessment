@@ -23,7 +23,7 @@ describe('getBasePrice', () => {
     expect(getBasePrice(product({ price: 100, salePrice: 80 }))).toBe(80);
   });
 
-  it('keeps a salePrice of 0 (?? not ||)', () => {
+  it('keeps a salePrice of 0', () => {
     expect(getBasePrice(product({ price: 100, salePrice: 0 }))).toBe(0);
   });
 

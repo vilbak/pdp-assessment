@@ -7,7 +7,7 @@ describe('clampRating', () => {
     expect(clampRating(4.6)).toBe(5);
   });
 
-  it('clamps above 5 (so 5 - rounded is never negative for repeat())', () => {
+  it('clamps above 5', () => {
     expect(clampRating(6)).toBe(5);
   });
 
