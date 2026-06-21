@@ -28,11 +28,7 @@ already works: the currency comes from the data, never hardcoded.
 All user-facing text lives in `config/strings.ts` and dates use `Intl`. Later you swap
 `strings.ts` for i18next / react-intl — there's no hardcoded copy to hunt down first.
 
-**Server-side rendering (SSR).**
-The api layer is plain async + React Query, which can prefetch on the server. This is the one
-that needs care: the Zustand stores are module singletons, so on the server they'd leak state
-between users (you'd give each request its own store), and `persist` touches `localStorage`
-(guard it on the server).
+
 
 ## Where new complexity should live
 
@@ -41,11 +37,11 @@ between users (you'd give each request its own store), and `persist` touches `lo
 - **Client** — presentation and short-lived UI state only.
 - **In between (`api/` + `data/`)** — turning server responses into typed, cached hooks.
 
-Rule of thumb: if getting it wrong costs money or trust, it belongs on the server.
+
 
 ## How the folders grow
 
-Today it's one flat slice, which is right for a single feature. When one part grows its own
-logic (say reviews or recommendations), split it into its own sub-folder. When something is
+Today it's one flat slice. When one part grows its own
+logic, split it into its own sub-folder. When something is
 needed by other features (the base client, tokens, the stores), move it up to the app level.
 Don't split early — only when a folder actually starts to hurt.
