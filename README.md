@@ -43,16 +43,15 @@ read from those directly, so nothing passes server data down by hand. Entry poin
   render. It's a plain value now. Memo would only help later — e.g. a list card, if the lists get long and
   profiling shows it's needed.
 - **Cancellation, dedup, caching (Issue 11).** Each query passes React Query's `signal` to `fetch`, so a
-  stale product request is cancelled when you switch products (no race). React Query also dedups identical
-  in-flight requests and caches per key; the view-tracking query fires once via `staleTime: Infinity`.
+  stale product request is cancelled when you switch products. React Query also dedups identical
+  in-flight requests and caches per key.
 
 ## Decisions & trade-offs
 
-- **React Query for server data** (over SWR / RTK Query): caching, cancellation, and request dedup out of
-  the box, and it keeps fetching out of components. RTK Query would pull in Redux, which this page doesn't
-  otherwise need.
+- **React Query for server data**: caching, cancellation, and request dedup out of
+  the box, and it keeps fetching out of components.
 - **Zustand for client state** (over Context / Redux): cart and recently-viewed are small and must survive
-  reloads — Zustand + `persist` does that with almost no boilerplate. Context would re-render half the tree;
+  reloads — Zustand + `persist` does that with almost no boilerplate.
   Redux is too much for two slices of state.
 - **Sections own their data** (Reviews, Delivery, Recommendations each run their own query) instead of the
   screen hook fetching everything: each section stays independent and the screen stays thin. The cost:
